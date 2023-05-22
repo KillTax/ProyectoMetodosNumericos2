@@ -1,6 +1,5 @@
 import streamlit as st
-from algoritmos.newton import newton_method
-from algoritmos.cuasi_newton import cuasi_newton_method
+import os
 
 # Definiciones
 
@@ -39,13 +38,23 @@ def mostrar_ejemplos():
     st.subheader("Método Cuasi-Newton")
     # Agrega aquí un ejemplo de uso del Método Cuasi-Newton
 
+# Código de los algoritmos
+
+def mostrar_codigo_algoritmo(algoritmo):
+    codigo_path = os.path.join("algoritmos", algoritmo + ".py")
+    
+    with open(codigo_path, "r") as file:
+        codigo = file.read()
+    
+    st.code(codigo)
+
 # Main
 
 def main():
     st.title("Métodos Numéricos: Newton y Cuasi-Newton")
     
     st.sidebar.title("Menú")
-    seleccion = st.sidebar.selectbox("Seleccione una opción", ["Definiciones", "Aplicaciones", "Ejemplos"])
+    seleccion = st.sidebar.selectbox("Seleccione una opción", ["Definiciones", "Aplicaciones", "Ejemplos", "Códigos"])
     
     if seleccion == "Definiciones":
         mostrar_definiciones()
@@ -53,6 +62,11 @@ def main():
         mostrar_aplicaciones()
     elif seleccion == "Ejemplos":
         mostrar_ejemplos()
+    elif seleccion == "Códigos":
+        st.header("Códigos de los algoritmos")
+        algoritmos = os.listdir("algoritmos")
+        algoritmo_seleccionado = st.selectbox("Seleccione un algoritmo", algoritmos)
+        mostrar_codigo_algoritmo(algoritmo_seleccionado)
 
 if __name__ == "__main__":
     main()
