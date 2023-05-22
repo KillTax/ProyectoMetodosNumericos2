@@ -1,68 +1,58 @@
-"""
-Método de Newton
+import streamlit as st
+from algoritmos.newton import newton_method
+from algoritmos.cuasi_newton import cuasi_newton_method
 
-En este archivo se explicará brevemente el método de Newton, su definición, aplicaciones y se proporcionará un ejemplo de uso.
+# Definiciones
 
-1. Método de Newton:
-El método de Newton es un algoritmo de optimización numérica utilizado para encontrar raíces o soluciones de
-ecuaciones no lineales. Utiliza el concepto de la derivada para aproximar la solución iterativamente.
+def mostrar_definiciones():
+    st.header("Definiciones")
+    
+    st.subheader("Método de Newton")
+    st.write("El Método de Newton es un algoritmo de optimización numérica utilizado para encontrar raíces o soluciones de ecuaciones no lineales.")
+    # Agrega aquí más información sobre el Método de Newton
+    
+    st.subheader("Método Cuasi-Newton")
+    st.write("El Método Cuasi-Newton es un método de optimización iterativo utilizado para resolver problemas de optimización no lineales.")
+    # Agrega aquí más información sobre el Método Cuasi-Newton
 
-Definición:
-Dada una función f(x), el método de Newton busca encontrar el valor de x para el cual f(x) es igual a cero.
-El método utiliza la aproximación lineal de la función alrededor de un punto inicial x0 para calcular una nueva
-estimación de la raíz.
+# Aplicaciones
 
-Aplicaciones:
-- Encontrar raíces de ecuaciones no lineales.
-- Optimización numérica.
-- Resolución de sistemas de ecuaciones no lineales.
+def mostrar_aplicaciones():
+    st.header("Aplicaciones")
+    
+    st.subheader("Método de Newton")
+    st.write("El Método de Newton tiene diversas aplicaciones en áreas como la física, ingeniería y ciencias computacionales.")
+    # Agrega aquí más aplicaciones del Método de Newton
+    
+    st.subheader("Método Cuasi-Newton")
+    st.write("El Método Cuasi-Newton se utiliza en problemas de optimización no lineales en campos como la economía, la física y la ingeniería.")
+    # Agrega aquí más aplicaciones del Método Cuasi-Newton
 
-Ejemplo:
+# Ejemplos
 
-Supongamos que queremos encontrar la raíz de la función f(x) = x^2 - 4. Podemos utilizar el método de Newton para esto.
+def mostrar_ejemplos():
+    st.header("Ejemplos")
+    
+    st.subheader("Método de Newton")
+    # Agrega aquí un ejemplo de uso del Método de Newton
+    
+    st.subheader("Método Cuasi-Newton")
+    # Agrega aquí un ejemplo de uso del Método Cuasi-Newton
 
-Pasos del método de Newton:
+# Main
 
-1. Elegir un punto inicial x0.
-2. Calcular la derivada de la función f(x).
-3. Calcular la nueva estimación de la raíz utilizando la fórmula: x1 = x0 - f(x0) / f'(x0), donde f'(x0) es la derivada de f(x) evaluada en x0.
-4. Repetir el paso 3 hasta que se alcance una precisión deseada o se obtenga una estimación suficientemente cercana a la raíz.
+def main():
+    st.title("Métodos Numéricos: Newton y Cuasi-Newton")
+    
+    st.sidebar.title("Menú")
+    seleccion = st.sidebar.selectbox("Seleccione una opción", ["Definiciones", "Aplicaciones", "Ejemplos"])
+    
+    if seleccion == "Definiciones":
+        mostrar_definiciones()
+    elif seleccion == "Aplicaciones":
+        mostrar_aplicaciones()
+    elif seleccion == "Ejemplos":
+        mostrar_ejemplos()
 
-Código de ejemplo:
-
-def newton_method(f, f_prime, x0, epsilon=1e-6, max_iterations=100):
-    """
-    Implementación del método de Newton para encontrar una raíz de la función f(x).
-    f: función original.
-    f_prime: derivada de la función f(x).
-    x0: punto inicial.
-    epsilon: precisión deseada.
-    max_iterations: número máximo de iteraciones permitidas.
-    """
-    x = x0
-    iterations = 0
-
-    while abs(f(x)) > epsilon and iterations < max_iterations:
-        x = x - f(x) / f_prime(x)
-        iterations += 1
-
-    if abs(f(x)) <= epsilon:
-        return x  # Se encontró una raíz dentro de la precisión deseada
-    else:
-        return None  # No se encontró una raíz en el número máximo de iteraciones permitidas
-
-# Definición de la función y su derivada
-def f(x):
-    return x**2 - 4
-
-def f_prime(x):
-    return 2*x
-
-# Uso del método de Newton para encontrar una raíz
-root = newton_method(f, f_prime, x0=2)
-
-if root is not None:
-    print("La raíz encontrada es:", root)
-else:
-    print("No se encontró una raíz en el número máximo de iteraciones permitidas.")
-
+if __name__ == "__main__":
+    main()
